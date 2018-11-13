@@ -5,6 +5,6 @@ import android.content.Intent;
 /**
  * @author kong
  */
-public interface RouterJumpCallback {
-    void onStartActivity(Intent intent);
+public interface RouterJumpHandler {
+    void handleStartActivity(Intent intent);
 }

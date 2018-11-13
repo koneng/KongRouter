@@ -14,6 +14,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Target(METHOD)
 @Retention(RUNTIME)
-public @interface RouterUri {
+public @interface RouterPath {
     String value() default "";
 }
