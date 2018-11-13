@@ -11,7 +11,9 @@ import android.widget.Toast;
 import com.example.administrator.R;
 import com.example.administrator.interfaces.IRouter;
 import com.kong.router.Router;
-import com.kong.router.RouterJumpHandler;
+import com.kong.router.annotation.RouterParam;
+import com.kong.router.interfaces.Interceptor;
+import com.kong.router.manager.RouterManager;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -23,7 +25,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //startActivity(new Intent(MainActivity.this, B_Activity.class));
 
-                IRouter router = (IRouter) Router.get().getIRouter();
+                RouterManager<IRouter> manager = new RouterManager
+                        .Builder<IRouter>(MainActivity.this)
+                        .create(IRouter.class)
+                        .addInterceptor(new Interceptor() {
+                            @Override
+                            public Intent intercept() {
+                                if(true) {
+                                    return new Intent(MainActivity.this, B_Activity.class);
+                                }
+                                return null;
+                            }
+                        })
+                        .build();
+
+                IRouter router = manager.getIRouter();
                 router.jumpBActivity("10000000");
 
                 // test 1

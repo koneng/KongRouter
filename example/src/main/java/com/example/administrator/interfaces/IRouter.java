@@ -2,10 +2,10 @@ package com.example.administrator.interfaces;
 
 import android.content.Intent;
 
-import com.kong.router.RouterJumpHandler;
-import com.kong.router.RouterParam;
-import com.kong.router.RouterPath;
-import com.kong.router.RouterUri;
+import com.kong.router.interfaces.RouterJumpHandler;
+import com.kong.router.annotation.RouterParam;
+import com.kong.router.annotation.RouterPath;
+import com.kong.router.annotation.RouterUri;
 
 public interface IRouter {
 

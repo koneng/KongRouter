@@ -14,10 +14,9 @@ public class B_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b);
-       /* Intent user = getIntent().getParcelableExtra("user");
-        Toast.makeText(this, "id == " + user.getStringExtra("id"), Toast.LENGTH_SHORT).show();*/
-
-        Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
+            /* Intent user = getIntent().getParcelableExtra("user");
+               Toast.makeText(this, "id == " + user.getStringExtra("id"), Toast.LENGTH_SHORT).show();*/
+            Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -16,7 +16,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aa94d46-477a-42a4-ab4e-1e6fdee45cf9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterPath.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RealChain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Chain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Interceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/manager/RouterManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -28,14 +31,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/example.iml" beforeDir="false" afterPath="$PROJECT_DIR$/example/example.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/B_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/B_Activity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/Router.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/RouterJumpHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java" beforeDir="false" afterPath="$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterUri.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,47 +65,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IRouter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java">
+      <file leaf-file-name="MyApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+            <state relative-caret-position="231">
+              <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#276#277#0" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="RouterUri.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java">
+        <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterUri.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="462">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -106,40 +89,91 @@
       <file leaf-file-name="B_Activity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/B_Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/router/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+              <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
             </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/.gitignore">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state />
+            <state relative-caret-position="301">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IRouter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Router.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/Router.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+            <state relative-caret-position="149">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
               <folding>
-                <element signature="e#884#885#0" expanded="true" />
-                <element signature="e#912#913#0" expanded="true" />
+                <element signature="e#848#849#0" expanded="true" />
+                <element signature="e#877#878#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RealChain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RealChain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#317#318#0" expanded="true" />
+                <element signature="e#360#361#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Chain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Chain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RouterManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/manager/RouterManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#491#492#0" expanded="true" />
+                <element signature="e#533#534#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interceptor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Interceptor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -150,12 +184,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>RouterJumpCallback</find>
+      <find>mInterceptors</find>
     </findStrings>
     <replaceStrings>
       <replace>RouterJumpHandler</replace>
@@ -3461,16 +3497,24 @@
         <option value="$PROJECT_DIR$/router/build.gradle" />
         <option value="$PROJECT_DIR$/example/build.gradle" />
         <option value="$PROJECT_DIR$/example/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpCallback.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterParam.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpHandler.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/IUri.java" />
+        <option value="$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterPath.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterManager.java" />
+        <option value="$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/intercepter.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/interceptor.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/manager/RouterManager.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Action.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Interceptor.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Chain.java" />
+        <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/RealChain.java" />
         <option value="$PROJECT_DIR$/router/src/main/java/com/kong/router/Router.java" />
         <option value="$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/B_Activity.java" />
-        <option value="$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java" />
         <option value="$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/MainActivity.java" />
       </list>
     </option>
@@ -3630,6 +3674,18 @@
               <item name="kong" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="KongRouter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KongRouter" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="router" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="kong" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -3640,14 +3696,14 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DEBUGGABLE_DEVICE" value="samsung-sm_g950f-ce011821c539212304" />
+    <property name="DEBUGGABLE_DEVICE" value="meizu-15-881QAESM7RD4C" />
     <property name="DEBUGGABLE_PROCESS" value="com.example.administrator" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.project.structure.last.selected" value="example" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="ce011821c539212304" />
+    <property name="device.picker.selection" value="881QAESM7RD4C" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/router" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/router" />
@@ -3853,7 +3909,7 @@
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1913646" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22761194" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49946696" weight="0.10449321" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291536" />
       <window_info anchor="right" id="Gradle" order="3" />
@@ -3876,11 +3932,26 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="16" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>getIntent()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>mInterceptors.get(index).intercept()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>realChain.proceed(mInterceptors.get(0))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>0x100</expression-string>
         <language-id>JAVA</language-id>
@@ -3904,7 +3975,7 @@
         <state relative-caret-position="363">
           <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#276#277#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3933,7 +4004,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java">
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterUri.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="429">
           <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
@@ -3955,20 +4026,20 @@
         <state relative-caret-position="132">
           <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="13" selection-end-column="3" />
           <folding>
-            <element signature="e#884#885#0" expanded="true" />
-            <element signature="e#912#913#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterParam.java">
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterParam.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpHandler.java">
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/RouterJumpHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
@@ -4020,16 +4091,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="37">
           <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="25" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4103,38 +4164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterParam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterJumpHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="7" column="34" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterPath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/Router.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-          <folding>
-            <element signature="e#884#885#0" expanded="true" />
-            <element signature="e#912#913#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/router/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -4148,23 +4177,6 @@
     <entry file="file://$PROJECT_DIR$/example/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RouterUri.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/app/Activity.java">
@@ -4181,27 +4193,131 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/RouterJumpHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterPath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Chain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/interfaces/Interceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/interfaces/IRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        <state relative-caret-position="296">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/MyApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+          <folding>
+            <element signature="e#276#277#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/manager/RouterManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/Router.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/RealChain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#317#318#0" expanded="true" />
+            <element signature="e#360#361#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/B_Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+        <state relative-caret-position="132">
+          <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/src/main/java/com/kong/router/annotation/RouterUri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/src/main/java/com/example/administrator/test/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+        <state relative-caret-position="301">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
