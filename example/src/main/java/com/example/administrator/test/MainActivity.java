@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public Intent intercept() {
                                 if(true) {
-                                    return new Intent(MainActivity.this, B_Activity.class);
+                                    Intent intent = new Intent(MainActivity.this, B_Activity.class);
+                                    intent.putExtra("id", "2000000000000000");
+                                    return intent;
                                 }
                                 return null;
                             }
