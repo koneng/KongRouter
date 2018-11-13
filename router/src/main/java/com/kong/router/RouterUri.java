@@ -7,9 +7,9 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-
 /**
  * @author kong
+ * 完整uri跳转路径
  */
 @Documented
 @Target(METHOD)
