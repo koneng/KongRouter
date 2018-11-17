@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.kong.router.annotation.RouterParam;
 import com.kong.router.annotation.RouterPath;
@@ -117,6 +118,34 @@ public class Router<T> {
                     }
                     return null;
                 });
+    }
+
+    public void startActivityForUri(String uri, RouterJumpHandler handler) {
+        if(!TextUtils.isEmpty(uri)) {
+            if (mInterceptors != null && mInterceptors.size() > 0) {
+                RealChain realChain = new RealChain(mInterceptors);
+                mIntent = realChain.proceed(mInterceptors.get(0));
+            }
+            Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            ComponentName componentName = in.resolveActivity(mContext.getPackageManager());
+            if(componentName != null) {
+                Intent intent = new Intent();
+                intent.setComponent(componentName);
+                Uri u = in.getData();
+                Set<String> set = u.getQueryParameterNames();
+                Iterator<String> iterator = set.iterator();
+                while (iterator.hasNext()){
+                    String key = iterator.next();
+                    String value = u.getQueryParameter(key);
+                    intent.putExtra(key, value);
+                }
+                if(handler == null) {
+                    mContext.startActivity(intent);
+                } else {
+                    handler.handleStartActivity(intent);
+                }
+            }
+        }
     }
 }
 

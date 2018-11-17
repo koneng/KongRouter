@@ -3,6 +3,8 @@ package com.kong.router.manager;
 import android.content.Context;
 import com.kong.router.Router;
 import com.kong.router.interfaces.Interceptor;
+import com.kong.router.interfaces.RouterJumpHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,14 @@ public class RouterManager<T> {
             throw new NullPointerException("IRouter is null !");
         }
         return mRouter.getIRouter();
+    }
+
+    public void startActivityForUri(String uri) {
+        mRouter.startActivityForUri(uri, null);
+    }
+
+    public void startActivityForUri(String uri, RouterJumpHandler handler) {
+        mRouter.startActivityForUri(uri, handler);
     }
 
    public static class Builder<T> {

@@ -8,15 +8,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.administrator.R;
+import com.example.administrator.UserBean;
 
 public class B_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b);
-            /* Intent user = getIntent().getParcelableExtra("user");
-               Toast.makeText(this, "id == " + user.getStringExtra("id"), Toast.LENGTH_SHORT).show();*/
-            Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
+
+        UserBean user = getIntent().getParcelableExtra("user");
+        Toast.makeText(this, "id == " + user.userId, Toast.LENGTH_SHORT).show();
     }
 
     @Override

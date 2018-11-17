@@ -3,16 +3,19 @@ package com.example.administrator.test;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.administrator.R;
+import com.example.administrator.UserBean;
 import com.example.administrator.interfaces.IRouter;
 import com.kong.router.Router;
 import com.kong.router.annotation.RouterParam;
 import com.kong.router.interfaces.Interceptor;
+import com.kong.router.interfaces.RouterJumpHandler;
 import com.kong.router.manager.RouterManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                         .addInterceptor(new Interceptor() {
                             @Override
                             public Intent intercept() {
-                                if(true) {
+                                if(false) {
                                     Intent intent = new Intent(MainActivity.this, B_Activity.class);
                                     intent.putExtra("id", "2000000000000000");
                                     return intent;
@@ -41,32 +44,24 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .build();
 
+                //test 1
+               /* IRouter router = manager.getIRouter();
+                router.jumpB_Activity("10000000");*/
+
+                //test 2
+                /*manager.startActivityForUri("kong://www.kong.com/b_activity?id=100000c",
+                        new RouterJumpHandler() {
+
+                    @Override
+                    public void handleStartActivity(Intent intent) {
+                        startActivityForResult(intent, 0x100);
+                    }
+                });*/
+
+                //test 3
                 IRouter router = manager.getIRouter();
-                router.jumpBActivity("10000000");
-
-                // test 1
-                /*Intent in = new Intent();
-                in.putExtra("id", "100000000a");
-                router.jumpBActivity(in);*/
-
-                // test 2
-                /*router.jumpBActivity("1000000b", new RouterJumpHandler() {
-                    @Override
-                    public void handleStartActivity(Intent intent) {
-                        startActivityForResult(intent, 0x100);
-                    }
-                });*/
-
-                // test 3
-               // router.jumpBActivity();
-
-                // test 4
-                /*router.jumpBActivity(new RouterJumpHandler() {
-                    @Override
-                    public void handleStartActivity(Intent intent) {
-                        startActivityForResult(intent, 0x100);
-                    }
-                });*/
+                UserBean user = new UserBean(100012);
+                router.jumpB_Activity(user);
             }
         });
     }
