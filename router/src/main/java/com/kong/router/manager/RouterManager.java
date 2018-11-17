@@ -52,7 +52,9 @@ public class RouterManager<T> {
         }
 
         public Builder addInterceptor(Interceptor interceptor) {
-            mInterceptors.add(interceptor);
+            if(mInterceptors != null) {
+                mInterceptors.add(interceptor);
+            }
             return this;
         }
 

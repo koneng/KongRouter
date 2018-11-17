@@ -16,10 +16,10 @@ public class B_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b);
 
-        //Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
 
-        UserBean user = getIntent().getParcelableExtra("user");
-        Toast.makeText(this, "id == " + user.userId, Toast.LENGTH_SHORT).show();
+        /*UserBean user = getIntent().getParcelableExtra("user");
+        Toast.makeText(this, "id == " + user.userId, Toast.LENGTH_SHORT).show();*/
     }
 
     @Override

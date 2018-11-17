@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.administrator.MyRouterManager;
 import com.example.administrator.R;
 import com.example.administrator.UserBean;
 import com.example.administrator.interfaces.IRouter;
@@ -28,40 +29,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //startActivity(new Intent(MainActivity.this, B_Activity.class));
 
-                RouterManager<IRouter> manager = new RouterManager
-                        .Builder<IRouter>(MainActivity.this)
-                        .create(IRouter.class)
-                        .addInterceptor(new Interceptor() {
-                            @Override
-                            public Intent intercept() {
-                                if(false) {
-                                    Intent intent = new Intent(MainActivity.this, B_Activity.class);
-                                    intent.putExtra("id", "2000000000000000");
-                                    return intent;
-                                }
-                                return null;
-                            }
-                        })
-                        .build();
-
+                RouterManager<IRouter> manager = MyRouterManager.get().getRouterManager();
                 //test 1
                /* IRouter router = manager.getIRouter();
                 router.jumpB_Activity("10000000");*/
 
                 //test 2
-                /*manager.startActivityForUri("kong://www.kong.com/b_activity?id=100000c",
+                manager.startActivityForUri("kong://www.kong.com/b_activity?id=100000c",
                         new RouterJumpHandler() {
 
                     @Override
                     public void handleStartActivity(Intent intent) {
                         startActivityForResult(intent, 0x100);
                     }
-                });*/
+                });
 
                 //test 3
-                IRouter router = manager.getIRouter();
+                /*IRouter router = manager.getIRouter();
                 UserBean user = new UserBean(100012);
-                router.jumpB_Activity(user);
+                router.jumpB_Activity(user);*/
             }
         });
     }
