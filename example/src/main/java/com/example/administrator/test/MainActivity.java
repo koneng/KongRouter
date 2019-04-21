@@ -16,7 +16,6 @@ import com.example.administrator.interfaces.IRouter;
 import com.kong.router.Router;
 import com.kong.router.annotation.RouterParam;
 import com.kong.router.interfaces.Interceptor;
-import com.kong.router.interfaces.RouterJumpHandler;
 import com.kong.router.manager.RouterManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,25 +28,34 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //startActivity(new Intent(MainActivity.this, B_Activity.class));
 
-                RouterManager<IRouter> manager = MyRouterManager.get().getRouterManager();
+                RouterManager manager = MyRouterManager.get().getRouterManager();
                 //test 1
-               /* IRouter router = manager.getIRouter();
-                router.jumpB_Activity("10000000");*/
+                IRouter router = manager.getIRouter();
+                router.jumpB_Activity("10000000");
 
-                //test 2
-                manager.startActivityForUri("kong://www.kong.com/b_activity?id=100000c",
-                        new RouterJumpHandler() {
+//                router.jumpB_Activity("10000000", new RouterJumpHandler() {
+//                    @Override
+//                    public void handleStartActivity(Intent intent) {
+//                        //todo....
+//                    }
+//                });
 
-                    @Override
-                    public void handleStartActivity(Intent intent) {
-                        startActivityForResult(intent, 0x100);
-                    }
-                });
-
-                //test 3
-                /*IRouter router = manager.getIRouter();
-                UserBean user = new UserBean(100012);
-                router.jumpB_Activity(user);*/
+//                //test 2
+//                manager.startActivityForUri("kong://www.kong.com/b_activity?id=100000c");
+//
+//                manager.startActivityForUri("kong://www.kong.com/b_activity?id=100000c",
+//                        new RouterJumpHandler() {
+//
+//                    @Override
+//                    public void handleStartActivity(Intent intent) {
+//                        startActivityForResult(intent, 0x100);
+//                    }
+//                });
+//
+//                //test 3
+//                IRouter router3 = manager.getIRouter();
+//                UserBean user = new UserBean(100012);
+//                router3.jumpB_Activity(user);
             }
         });
     }

@@ -12,7 +12,7 @@ import com.kong.router.manager.RouterManager;
 public class MyRouterManager {
 
     private static MyRouterManager instance;
-    private RouterManager<IRouter> mRouterManager;
+    private RouterManager mRouterManager;
     private Context mContext;
 
     private MyRouterManager() {
@@ -28,25 +28,13 @@ public class MyRouterManager {
     public void initRouter(Context context) {
         mContext = context.getApplicationContext();
         mRouterManager = new RouterManager
-                .Builder<IRouter>(context)
+                .Builder(context)
                 .create(IRouter.class)
-                .addInterceptor(mInterceptor)
                 .build();
     }
 
-    public RouterManager<IRouter> getRouterManager() {
+    public RouterManager getRouterManager() {
         return mRouterManager;
     }
 
-    private Interceptor mInterceptor = new Interceptor() {
-        @Override
-        public Intent intercept() {
-            if(false) {
-                Intent intent = new Intent(mContext, B_Activity.class);
-                intent.putExtra("id", "2000000000000000");
-                return intent;
-            }
-            return null;
-        }
-    };
 }

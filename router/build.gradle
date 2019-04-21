@@ -10,7 +10,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -27,4 +26,7 @@ android {
 }
 
 dependencies {
+    annotationProcessor project(':router_map')
+    api project(':router_map')
+    implementation 'org.jetbrains:annotations:15.0'
 }
