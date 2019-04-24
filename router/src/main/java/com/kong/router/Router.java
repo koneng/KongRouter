@@ -67,6 +67,7 @@ public class Router {
                 }
             }
         }
+        instance.clearCache();
         return instance;
     }
 
@@ -321,6 +322,13 @@ public class Router {
             }
         }
         return requestCode;
+    }
+
+    private void clearCache() {
+        mTargetMap.clear();
+        mPathMap.clear();
+        mParamsMap.clear();
+        mPath = "";
     }
 }
 
