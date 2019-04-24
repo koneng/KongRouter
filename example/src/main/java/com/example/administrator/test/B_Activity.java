@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.administrator.R;
+import com.example.administrator.UserBean;
+import com.example.administrator.interfaces.IRouter;
+import com.kong.router.Router;
 import com.shopee.router.annotation.RouterTarget;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 @RouterTarget(path = "b/activity")
@@ -25,10 +26,9 @@ public class B_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b);
 
-        Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
-
-        /*UserBean user = getIntent().getParcelableExtra("user");
-        Toast.makeText(this, "id == " + user.userId, Toast.LENGTH_SHORT).show();*/
+       // Toast.makeText(this, "id == " + getIntent().getStringExtra("id"), Toast.LENGTH_SHORT).show();
+        String xxx = getIntent().getStringExtra("xxx");
+        Toast.makeText(this, "xxx == " + xxx, Toast.LENGTH_SHORT).show();
 
         ButterKnife.bind(this);
 
@@ -36,7 +36,12 @@ public class B_Activity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(B_Activity.this, "id == 88888", Toast.LENGTH_SHORT).show();
+                UserBean userBean = new UserBean(888888);
+                //test 1
+                Router.get().path("main/mainActivity")
+                        .addIRouter(IRouter.class)
+                        .withObject(userBean)
+                        .navigation();
             }
         });
 

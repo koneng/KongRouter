@@ -7,22 +7,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.text.TextUtils;
-
-import com.kong.router.annotation.RequestCode;
-import com.kong.router.annotation.RouterParam;
-import com.kong.router.annotation.RouterPath;
-import com.kong.router.annotation.RouterUri;
+import com.shopee.router.annotation.RequestCode;
+import com.shopee.router.annotation.RouterParam;
+import com.shopee.router.annotation.RouterUri;
 import com.kong.router.interfaces.IAction;
 import com.kong.router.interfaces.Interceptor;
-import com.kong.router.manager.RouterManager;
-import com.shopee.router.annotation.interfaces.Constants;
-import com.shopee.router.annotation.interfaces.IRouterMap;
-
+import com.shopee.router.Constants;
+import com.shopee.router.annotation.RouterPath;
+import com.shopee.router.interfaces.IRouterPathMap;
+import com.shopee.router.interfaces.IRouterTargetMap;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,36 +33,153 @@ import java.util.Set;
 public class Router {
 
     private Context mContext;
+    private List<Interceptor> mInterceptors = new ArrayList<>();
+    private Map<String, Class> mTargetMap = new HashMap<>();
+    private Map<String, String> mPathMap = new HashMap<>();
+    private Map<Class, Object> mParamsMap = new HashMap<>();
     private Object mProxy;
-    private List<Interceptor> mInterceptors;
-    private  Map<String, Class> routerMap = new HashMap<>();
+    private String mPath;
 
-    public <T> void initRouter(Context context, Class<T> tClass, List<Interceptor> interceptors) {
-        mContext = context.getApplicationContext();
+    private volatile static Router instance;
+
+    private Router() {
         try {
-            Class<?> routerMapClass = Class.forName(Constants.ROUTER_MAP_PACKAGE_NAME + "." + Constants.ROUTER_MAP_NAME);
-            IRouterMap iRouterMap = (IRouterMap) routerMapClass.newInstance();
-            routerMap = iRouterMap.loadInfo();
+            Class<?> routerTargetMapClass = Class.forName(Constants.ROUTER_MAP_PACKAGE_NAME + "." + Constants.ROUTER_TARGET_MAP_NAME);
+            IRouterTargetMap iRouterMap = (IRouterTargetMap) routerTargetMapClass.newInstance();
+            mTargetMap = iRouterMap.loadInfo();
         } catch (Exception e) {
             //路由map找不到 ，ignore
         }
-        mInterceptors = interceptors;
-        mProxy = create(tClass);
+        try {
+            Class<?> routerPathMapClass = Class.forName(Constants.ROUTER_MAP_PACKAGE_NAME + "." + Constants.ROUTER_PATH_MAP_NAME);
+            IRouterPathMap iRouterMap = (IRouterPathMap) routerPathMapClass.newInstance();
+            mPathMap = iRouterMap.loadInfo();
+        } catch (Exception e) {
+            //路径map找不到 ，ignore
+        }
     }
 
-    public <T> T getIRouter() {
-        return (T) mProxy;
+    public static Router get() {
+        if (instance == null) {
+            synchronized (Router.class) {
+                if (instance == null) {
+                    instance = new Router();
+                }
+            }
+        }
+        return instance;
     }
 
-    private <T> Object create(Class<T> aClass) {
-        return Proxy.newProxyInstance(aClass.getClassLoader(), new Class<?>[]{aClass},
+    /**
+     * init
+     * @param context
+     */
+    public void init(Context context) {
+        mContext = context.getApplicationContext();
+    }
+
+    public Router addInterceptor(Interceptor interceptor) {
+        mInterceptors.add(interceptor);
+        return this;
+    }
+
+    public Router addInterceptors(List<Interceptor> interceptors) {
+        mInterceptors.addAll(interceptors);
+        return this;
+    }
+
+    public <T> T create(Class<T> aClass) {
+        return proxy(aClass);
+    }
+
+    public <T> Router addIRouter(Class<T> routerInterface) {
+        mProxy = proxy(routerInterface);
+        return this;
+    }
+
+    public Router path(String path) {
+        mPath = path;
+        return this;
+    }
+
+    public Router withInt(int value) {
+        mParamsMap.put(int.class, value);
+        return this;
+    }
+
+    public Router withString(String value) {
+        mParamsMap.put(String.class, value);
+        return this;
+    }
+
+    public Router withObject(Parcelable value) {
+        mParamsMap.put(value.getClass(), value);
+        return this;
+    }
+
+    public Router withObject(Serializable value) {
+        mParamsMap.put(value.getClass(), value);
+        return this;
+    }
+
+    public Router withLong(int value) {
+        mParamsMap.put(long.class, value);
+        return this;
+    }
+
+    public Router withFloat(int value) {
+        mParamsMap.put(float.class, value);
+        return this;
+    }
+
+    public Router withDouble(int value) {
+        mParamsMap.put(double.class, value);
+        return this;
+    }
+
+    public void navigation() {
+        if(TextUtils.isEmpty(mPath)) {
+            throw new RuntimeException("is not add path !");
+        }
+        if(mProxy == null) {
+            throw new RuntimeException("is not add router interface !");
+        }
+        String methodName = mPathMap.get(mPath);
+        if(methodName != null) {
+            int count = mParamsMap.size();
+            Class[] parameterTypes = new  Class[count];
+            Object[] parameters = new Object[count];
+            int index = 0;
+            Iterator<Class> iterator = mParamsMap.keySet().iterator();
+            while (iterator.hasNext() && index < count) {
+                Class type = iterator.next();
+                parameterTypes[index] = type;
+                parameters[index] = mParamsMap.get(type);
+                index ++;
+            }
+            Method method;
+            try {
+                method = mProxy.getClass().getDeclaredMethod(methodName, parameterTypes);
+                method.setAccessible(true);
+                method.invoke(mProxy, parameters);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private <T> T proxy(Class<T> aClass) {
+        if(mContext == null) {
+            throw new RuntimeException("context is not init !");
+        }
+        return (T)Proxy.newProxyInstance(aClass.getClassLoader(), new Class<?>[]{aClass},
                 (proxy, method, args) -> {
                     boolean isUri;
                     RouterPath routerPath = method.getAnnotation(RouterPath.class);
                     String uri;
                     if (routerPath != null) {
                         isUri = false;
-                        uri = routerPath.value();
+                        uri = routerPath.path();
                     } else {
                         isUri = true;
                         RouterUri routerUri = method.getAnnotation(RouterUri.class);
@@ -80,7 +197,7 @@ public class Router {
                         }
                         startActivity(args, action, method, target);
                     } else {
-                        Class activity = routerMap.get(uri);
+                        Class activity = mTargetMap.get(uri);
                         if(activity != null) {
                             target.setClass(mContext, activity);
                             startActivity(args, action, method, target);

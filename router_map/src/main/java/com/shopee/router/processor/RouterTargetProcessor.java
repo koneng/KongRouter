@@ -1,8 +1,9 @@
-package com.shopee.router.annotation;
+package com.shopee.router.processor;
 
 import com.google.auto.service.AutoService;
-import com.shopee.router.annotation.interfaces.Constants;
-import com.shopee.router.annotation.interfaces.IRouterMap;
+import com.shopee.router.annotation.RouterTarget;
+import com.shopee.router.Constants;
+import com.shopee.router.interfaces.IRouterTargetMap;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
@@ -10,11 +11,13 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
@@ -23,12 +26,13 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
+
 import static javax.lang.model.element.Modifier.PRIVATE;
 import static javax.lang.model.element.Modifier.PUBLIC;
 
 
 @AutoService(value = Processor.class)
-public class RouterProcessor extends AbstractProcessor {
+public class RouterTargetProcessor extends AbstractProcessor {
 
     private String mModuleName;
 
@@ -86,10 +90,10 @@ public class RouterProcessor extends AbstractProcessor {
                 .build();
 
 
-        //生成参数 Map<String,Class activity> routes
+        //生成参数 Map<String,Class activity> routes = new HashMap<> ();
         ParameterSpec parameter = ParameterSpec.builder(parameterizedTypeName, "routes").build();
 
-        //生成函数 public void loadInfo(Map<String,Class activity> routes)
+        //生成函数 public Map<String,Class> loadInfo()
         MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("loadInfo")
                 .returns(parameter.type)
                 .addAnnotation(Override.class)
@@ -108,10 +112,10 @@ public class RouterProcessor extends AbstractProcessor {
         methodBuilder.addStatement("return routes");
 
         //生成类
-        String className = Constants.ROUTER_MAP_NAME;
+        String className = Constants.ROUTER_TARGET_MAP_NAME;
         TypeSpec typeSpec = TypeSpec.classBuilder(className)
                 .addModifiers(PUBLIC)
-                .addSuperinterface(IRouterMap.class)
+                .addSuperinterface(IRouterTargetMap.class)
                 .addField(fieldSpec)
                 .addMethod(methodBuilder.build())
                 .build();

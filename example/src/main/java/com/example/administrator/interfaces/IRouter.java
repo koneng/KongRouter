@@ -3,35 +3,37 @@ package com.example.administrator.interfaces;
 import android.app.Activity;
 
 import com.example.administrator.UserBean;
-import com.kong.router.annotation.RequestCode;
+import com.shopee.router.annotation.RequestCode;
 import com.kong.router.interfaces.IAction;
-import com.kong.router.annotation.RouterParam;
-import com.kong.router.annotation.RouterPath;
-import com.kong.router.annotation.RouterUri;
+import com.shopee.router.annotation.RouterParam;
+import com.shopee.router.annotation.RouterUri;
+import com.shopee.router.annotation.RouterPath;
 
 public interface IRouter {
 
-    @RouterPath("b/activity")
+    @RouterPath(path = "b/activity")
     void jumpB_Activity(@RouterParam("id") String id);
 
-    @RouterPath("kong://www.kong.com/b_activity")
+    @RouterPath(path = "kong://www.kong.com/b_activity")
     void jumpB_Activity(@RouterParam("id") String id, IAction actionProxy);
 
-    @RouterPath("kong://www.kong.com/b_activity")
+    @RouterPath(path = "kong://www.kong.com/b_activity")
     void jumpB_Activity(@RouterParam("user") UserBean user);
 
-    @RouterUri("kong://www.kong.com/b_activity?id=100000c")
+    @RouterUri("kong://www.kong.com/b_activity?xxx=dddd")
     void jumpB_Activity();
 
     @RouterUri("kong://www.kong.com/b_activity?id=100000c")
     void jumpB_Activity(IAction actionProxy);
 
-    @RouterPath("kong://www.kong.com/b_activity")
+    @RouterPath(path = "kong://www.kong.com/b_activity")
     void jumpB_Activity(Activity context, @RequestCode int requestCode);
 
 
-    void jump(String url);
+    @RouterPath(path = "main/mainActivity")
+    void jumpMainActivity(@RouterParam("user") UserBean user);
 
-
+    @RouterPath(path = "main/mainActivity")
+    void jumpMainActivity(@RouterParam("userId") int id);
 
 }
