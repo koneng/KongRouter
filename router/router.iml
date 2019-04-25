@@ -114,5 +114,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="router_map" />
     <orderEntry type="module" module-name="router_map" />
+    <orderEntry type="module" module-name="router_map" />
   </component>
 </module>

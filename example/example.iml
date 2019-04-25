@@ -173,5 +173,7 @@
     <orderEntry type="module" module-name="router" />
     <orderEntry type="module" module-name="router_map" />
     <orderEntry type="module" module-name="router" />
+    <orderEntry type="module" module-name="router_map" />
+    <orderEntry type="module" module-name="router" />
   </component>
 </module>

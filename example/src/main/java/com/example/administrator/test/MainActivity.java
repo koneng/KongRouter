@@ -11,17 +11,30 @@ import android.widget.Toast;
 import com.example.administrator.R;
 import com.example.administrator.UserBean;
 import com.example.administrator.interfaces.IRouter;
+import com.kong.router.ARouter;
 import com.kong.router.Router;
 import com.kong.router.interfaces.IAction;
+import com.shopee.router.annotation.RouterField;
 import com.shopee.router.annotation.RouterTarget;
 
-@RouterTarget(path = "main/mainActivity")
+@RouterTarget(path = "/main/mainActivity")
 public class MainActivity extends AppCompatActivity {
+
+    @RouterField("main_id")
+    int userId;
+
+    @RouterField("user")
+    UserBean userBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
+        ARouter.get().inject(this);
+        if(userBean != null) {
+            Toast.makeText(this, "test success ! ....userId  === " + userBean.userId, Toast.LENGTH_SHORT).show();
+        }
         if(intent != null) {
             UserBean userBean = intent.getParcelableExtra("user");
             if(userBean != null) {
@@ -33,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
         findViewById(R.id.hello).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
                // Router.get().create(IRouter.class).jumpB_Activity("10000000", null);
 
-                Router.get().create(IRouter.class).jumpB_Activity();
+               // Router.get().create(IRouter.class).jumpB_Activity();
+
+                ARouter.get().uri("/b/activity?id=12222222").navigation();
+
+                /*ARouter.get().path("/b/activity")
+                        .withInt("id", 123455)
+                        .navigation();*/
 
                // IRouter router = Router.get().create(IRouter.class);
 

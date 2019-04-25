@@ -7,15 +7,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import com.shopee.router.annotation.RequestCode;
-import com.shopee.router.annotation.RouterParam;
-import com.shopee.router.annotation.RouterUri;
+
 import com.kong.router.interfaces.IAction;
 import com.kong.router.interfaces.Interceptor;
 import com.shopee.router.Constants;
+import com.shopee.router.annotation.RequestCode;
+import com.shopee.router.annotation.RouterParam;
 import com.shopee.router.annotation.RouterPath;
+import com.shopee.router.annotation.RouterUri;
+import com.shopee.router.interfaces.IRouterMap;
 import com.shopee.router.interfaces.IRouterPathMap;
-import com.shopee.router.interfaces.IRouterTargetMap;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -37,18 +38,18 @@ public class Router {
     private Map<String, Class> mTargetMap = new HashMap<>();
     private Map<String, String> mPathMap = new HashMap<>();
     private Map<Class, Object> mParamsMap = new HashMap<>();
-    private Object mProxy;
+    private List<Object> mProxys = new ArrayList<>();
     private String mPath;
 
     private volatile static Router instance;
 
     private Router() {
         try {
-            Class<?> routerTargetMapClass = Class.forName(Constants.ROUTER_MAP_PACKAGE_NAME + "." + Constants.ROUTER_TARGET_MAP_NAME);
-            IRouterTargetMap iRouterMap = (IRouterTargetMap) routerTargetMapClass.newInstance();
-            mTargetMap = iRouterMap.loadInfo();
+            Class<?> routerMapClass = Class.forName(Constants.ROUTER_MAP_PACKAGE_NAME + "." + Constants.ROUTER_MAP_NAME);
+            IRouterMap iRouterMap = (IRouterMap) routerMapClass.newInstance();
+            mTargetMap = iRouterMap.loadPathClassInfo();
         } catch (Exception e) {
-            //路由map找不到 ，ignore
+            //属性map找不到 ，ignore
         }
         try {
             Class<?> routerPathMapClass = Class.forName(Constants.ROUTER_MAP_PACKAGE_NAME + "." + Constants.ROUTER_PATH_MAP_NAME);
@@ -89,20 +90,22 @@ public class Router {
         return this;
     }
 
+    //固定模板，通过接口调用跳转
     public <T> T create(Class<T> aClass) {
         return proxy(aClass);
     }
 
-    public <T> Router addIRouter(Class<T> routerInterface) {
-        mProxy = proxy(routerInterface);
-        return this;
-    }
-
+    //---------------------------------------------------------------------------------------
+    //path调用跳转
     public Router path(String path) {
         mPath = path;
         return this;
     }
 
+    public <T> Router addIRouter(Class<T> routerInterface) {
+        mProxys.add(proxy(routerInterface));
+        return this;
+    }
     public Router withInt(int value) {
         mParamsMap.put(int.class, value);
         return this;
@@ -142,7 +145,7 @@ public class Router {
         if(TextUtils.isEmpty(mPath)) {
             throw new RuntimeException("is not add path !");
         }
-        if(mProxy == null) {
+        if(mProxys.size() == 0) {
             throw new RuntimeException("is not add router interface !");
         }
         String methodName = mPathMap.get(mPath);
@@ -160,14 +163,49 @@ public class Router {
             }
             Method method;
             try {
-                method = mProxy.getClass().getDeclaredMethod(methodName, parameterTypes);
-                method.setAccessible(true);
-                method.invoke(mProxy, parameters);
+                for(Object proxy : mProxys) {
+                    method = proxy.getClass().getDeclaredMethod(methodName, parameterTypes);
+                    if(method != null) {
+                        method.setAccessible(true);
+                        method.invoke(proxy, parameters);
+                        break;
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                mPath = "";
             }
         }
     }
+
+    //----------------------------------------------------------------------------------------------
+    //通过uri跳转
+    public void startActivityForUri(String uri) {
+        startActivityForUri(uri, null);
+    }
+
+    public void startActivityForUri(String uri, IAction action) {
+        startActivityForUri(null, uri, -1, action);
+    }
+
+    public void startActivityForUri(Activity context, String uri,
+                                    int requestCode, IAction action) {
+        if(!TextUtils.isEmpty(uri)) {
+            Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            ComponentName componentName = in.resolveActivity(mContext.getPackageManager());
+            if(componentName != null) {
+                Intent intent = new Intent();
+                intent.setComponent(componentName);
+                parseUri(in, intent);
+                Intent target = interceptProceed(intent);
+                if(target != null) {
+                    startActivity(context, target, requestCode, action);
+                }
+            }
+        }
+    }
+
 
     private <T> T proxy(Class<T> aClass) {
         if(mContext == null) {
@@ -214,31 +252,6 @@ public class Router {
                     }
                     return null;
                 });
-    }
-
-    public void startActivityForUri(String uri) {
-        startActivityForUri(uri, null);
-    }
-
-    public void startActivityForUri(String uri, IAction action) {
-        startActivityForUri(null, uri, -1, action);
-    }
-
-    public void startActivityForUri(Activity context, String uri,
-                                    int requestCode, IAction action) {
-        if(!TextUtils.isEmpty(uri)) {
-            Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            ComponentName componentName = in.resolveActivity(mContext.getPackageManager());
-            if(componentName != null) {
-                Intent intent = new Intent();
-                intent.setComponent(componentName);
-                parseUri(in, intent);
-                Intent target = interceptProceed(intent);
-                if(target != null) {
-                    startActivity(context, target, requestCode, action);
-                }
-            }
-        }
     }
 
     private void startActivity (Object[] args, IAction action, Method method, Intent target) {
@@ -325,10 +338,8 @@ public class Router {
     }
 
     private void clearCache() {
-        mTargetMap.clear();
-        mPathMap.clear();
         mParamsMap.clear();
-        mPath = "";
+        mProxys.clear();
     }
 }
 
